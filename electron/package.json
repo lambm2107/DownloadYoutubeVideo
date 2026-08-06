@@ -1,0 +1,67 @@
+{
+  "name": "vidgrab-desktop",
+  "version": "1.4.0",
+  "description": "VidGrab — Trình tải video YouTube",
+  "main": "main.js",
+  "author": "VidGrab",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "build:dir": "electron-builder --win --x64 --dir"
+  },
+  "build": {
+    "appId": "com.vidgrab.desktop",
+    "productName": "VidGrab",
+    "copyright": "VidGrab",
+    "directories": {
+      "output": "../dist-electron"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "icon.ico"
+    ],
+    "extraResources": [
+      {
+        "from": "../dist-desktop",
+        "to": "dist-desktop",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "../dist/VidGrab.exe",
+        "to": "python-core.exe"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon.ico",
+      "shortcutName": "VidGrab",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^36.4.0",
+    "electron-builder": "^26.0.12"
+  },
+  "allowScripts": {
+    "electron@36.9.5": true,
+    "electron-winstaller@5.4.0": true
+  }
+}
